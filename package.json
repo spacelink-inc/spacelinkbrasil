@@ -1,19 +1,24 @@
 {
-  "name": "@spacelinkbrasil",
-  "private": true,
-  "scripts": {
-    "build": "turbo build",
-    "dev": "turbo dev",
-    "lint": "turbo lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
-  },
-  "devDependencies": {
-    "prettier": "^3.2.5",
-    "turbo": "^2.3.3",
-    "typescript": "5.5.4"
-  },
-  "packageManager": "pnpm@9.0.0",
-  "engines": {
-    "node": ">=18"
-  }
+    "name": "@spacelink/software",
+    "private": true,
+    "author": "Cristian Freitas <contato@cristianfreitas.com.br>",
+    "scripts": {
+        "build": "turbo build",
+        "dev": "turbo dev",
+        "lint": "turbo lint",
+        "build:api": "turbo build --filter=@spacelink/api",
+        "build:web": "turbo build --filter=@spacelink/web",
+        "build:docs": "turbo build --filter=@spacelink/docs",
+        "build:mail": "turbo build --filter=@spacelink/mail",
+        "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    },
+    "devDependencies": {
+        "prettier": "^3.2.5",
+        "turbo": "^2.3.3",
+        "typescript": "5.5.4"
+    },
+    "packageManager": "pnpm@9.0.0",
+    "engines": {
+        "node": ">=18"
+    }
 }

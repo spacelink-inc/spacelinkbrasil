@@ -1,0 +1,352 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Role {
+  """Unique identifier for the model"""
+  id: String!
+
+  """Timestamp when the permission was created"""
+  createdAt: DateTime!
+
+  """Timestamp when the permission was last updated"""
+  updatedAt: DateTime!
+
+  """Unique name of the role"""
+  name: String!
+
+  """
+  Optional description explaining the purpose and permissions of the role
+  """
+  description: String
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Wallet {
+  """Unique identifier for the model"""
+  id: String!
+
+  """Timestamp when the permission was created"""
+  createdAt: DateTime!
+
+  """Timestamp when the permission was last updated"""
+  updatedAt: DateTime!
+
+  """Wallet's balance"""
+  balance: Float!
+
+  """Wallet's active status"""
+  active: Boolean!
+}
+
+type Address {
+  """Unique identifier for the model"""
+  id: String!
+
+  """Timestamp when the permission was created"""
+  createdAt: DateTime!
+
+  """Timestamp when the permission was last updated"""
+  updatedAt: DateTime!
+
+  """Address street"""
+  street: String!
+
+  """Address number"""
+  number: String!
+
+  """Address complement"""
+  complement: String
+
+  """Address neighborhood"""
+  neighborhood: String!
+
+  """Address city"""
+  city: String!
+
+  """Address state"""
+  state: String!
+
+  """Address country"""
+  country: String!
+
+  """Address postal code"""
+  postalCode: String!
+}
+
+type Transfer {
+  """Unique identifier for the model"""
+  id: String!
+
+  """Timestamp when the permission was created"""
+  createdAt: DateTime!
+
+  """Timestamp when the permission was last updated"""
+  updatedAt: DateTime!
+
+  """Status of the transfer"""
+  transferStatus: TransferStatusEnum!
+
+  """User who made the transfer"""
+  user: User!
+}
+
+enum TransferStatusEnum {
+  INVOICE
+  PENDING
+  CANCELED
+  COMPLETED
+}
+
+type User {
+  """Unique identifier for the model"""
+  id: String!
+
+  """Timestamp when the permission was created"""
+  createdAt: DateTime!
+
+  """Timestamp when the permission was last updated"""
+  updatedAt: DateTime!
+
+  """User's first name"""
+  name: String!
+
+  """User's last name"""
+  surname: String!
+
+  """User's email address"""
+  email: String!
+
+  """User's phone number"""
+  phone: String!
+
+  """User's document number"""
+  document: String!
+
+  """User's authentication token"""
+  token: String
+
+  """User's associated wallet"""
+  wallet: Wallet!
+
+  """User's address"""
+  address: Address!
+
+  """User's role"""
+  role: Role!
+
+  """User's transfers"""
+  transfers: [Transfer!]!
+}
+
+type Permission {
+  """Unique identifier for the model"""
+  id: String!
+
+  """Timestamp when the permission was created"""
+  createdAt: DateTime!
+
+  """Timestamp when the permission was last updated"""
+  updatedAt: DateTime!
+
+  """Name of the permission"""
+  name: String!
+
+  """Detailed description of what the permission allows"""
+  description: String!
+}
+
+type Auth {
+  """User logged in"""
+  user: User!
+
+  """Session access token"""
+  accessToken: String!
+}
+
+type Customer {
+  """Unique identifier for the model"""
+  id: String!
+
+  """Timestamp when the permission was created"""
+  createdAt: DateTime!
+
+  """Timestamp when the permission was last updated"""
+  updatedAt: DateTime!
+
+  """First name of the customer"""
+  name: String!
+
+  """Last name of the customer"""
+  surname: String!
+
+  """Email address of the customer"""
+  email: String!
+
+  """Phone number of the customer"""
+  phone: String!
+
+  """Document number (CPF/CNPJ) of the customer"""
+  document: String!
+
+  """Type of the customer (CUSTOMER or USER)"""
+  type: CustomerTypeEnum!
+
+  """Authentication token for the customer if applicable"""
+  token: String
+}
+
+enum CustomerTypeEnum {
+  CUSTOMER
+  USER
+}
+
+type Query {
+  users: [User!]!
+  user(id: String!): User!
+  userByEmail(email: String!): User!
+  me: User!
+  getAllPermissions: [Permission!]!
+  getPermissionById(id: String!): Permission
+  getAllRoles: [Role!]!
+  getRoleById(id: String!): Role
+  customers: [Customer!]!
+  customer(id: String!): Customer!
+  customerByEmail(email: String!): Customer!
+}
+
+type Mutation {
+  sendValidationEmail(username: String!, email: String!, validationCode: String!): Boolean!
+  sendWelcomeEmail(username: String!, invitedByUsername: String!, invitedByEmail: String!, inviteLink: String!): Boolean!
+  sendSingleWelcomeEmail(username: String!, email: String!): Boolean!
+  signIn(signInInput: SignInInput!): Auth!
+  createUser(createUserInput: CreateUserInput!): User!
+  updateUser(updateUserInput: UpdateUserInput!): User!
+  removeUser(id: String!): User!
+  createPermission(createPermissionInput: CreatePermissionInput!): Permission!
+  updatePermission(id: String!, updatePermissionInput: CreatePermissionInput!): Permission!
+  deletePermission(id: String!): Permission!
+  createRole(createRoleInput: CreateRoleInput!): Role!
+  updateRole(id: String!, updateRoleInput: CreateRoleInput!): Role!
+  deleteRole(id: String!): Role!
+  createTransfer(data: CreateTransferInput!): Transfer!
+  changeTransferStatus(id: String!, status: TransferStatusEnum!): Transfer!
+  deleteTransfer(id: String!): Transfer!
+  createCustomer(input: CreateCustomerInput!): Customer!
+  deleteCustomer(id: String!): Customer!
+  changeCustomerType(id: String!, type: String!): Customer!
+  createRegistrationCode(email: String!): Boolean!
+  resendRegistrationCode(email: String!): Boolean!
+  verifyRegistrationCode(email: String!, code: String!): Boolean!
+  deleteRegistrationCode(email: String!): Boolean!
+}
+
+input SignInInput {
+  """Email of the user"""
+  email: String!
+
+  """Password of the user"""
+  normalizedPassword: String!
+}
+
+input CreateUserInput {
+  """User's first name"""
+  name: String!
+
+  """User's last name"""
+  surname: String!
+
+  """User's email address"""
+  email: String!
+
+  """User's phone number"""
+  phone: String!
+
+  """User's password"""
+  password: String!
+
+  """User's document number"""
+  document: String!
+
+  """User's address ID"""
+  addressId: String
+}
+
+input UpdateUserInput {
+  """User's first name"""
+  name: String
+
+  """User's last name"""
+  surname: String
+
+  """User's email address"""
+  email: String
+
+  """User's phone number"""
+  phone: String
+
+  """User's password"""
+  password: String
+
+  """User's document number"""
+  document: String
+
+  """User's address ID"""
+  addressId: String
+
+  """User's ID"""
+  id: String!
+
+  """User's role ID"""
+  roleId: String
+}
+
+input CreatePermissionInput {
+  """Name of the permission"""
+  name: String!
+
+  """Detailed description of what the permission allows"""
+  description: String!
+}
+
+input CreateRoleInput {
+  """Unique name of the role"""
+  name: String!
+
+  """
+  Optional description explaining the purpose and permissions of the role
+  """
+  description: String
+}
+
+input CreateTransferInput {
+  """Status of the transfer"""
+  transferStatus: TransferStatusEnum! = PENDING
+
+  """ID of the user making the transfer"""
+  userId: String!
+}
+
+input CreateCustomerInput {
+  """First name of the customer"""
+  name: String!
+
+  """Last name of the customer"""
+  surname: String!
+
+  """Email address of the customer"""
+  email: String!
+
+  """Phone number of the customer"""
+  phone: String!
+
+  """Document number (CPF/CNPJ) of the customer"""
+  document: String!
+
+  """Type of the customer (CUSTOMER or USER)"""
+  type: CustomerTypeEnum!
+}

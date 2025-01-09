@@ -1,0 +1,29 @@
+{
+    "name": "@spacelink/mail",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "dev": "tsx watch ./src/app.ts",
+        "build": "tsx build ./src/app.ts"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "@react-email/components": "0.0.32",
+        "@types/node": "^20.11.24",
+        "express": "^4.21.2",
+        "react": "19.0.0",
+        "react-dom": "19.0.0",
+        "resend": "^4.0.1",
+        "tsx": "^4.19.2",
+        "zod": "^3.24.1"
+    },
+    "devDependencies": {
+        "@types/express": "^5.0.0",
+        "@types/react": "^19.0.4",
+        "react-email": "3.0.5",
+        "typescript": "^5.7.3"
+    }
+}
