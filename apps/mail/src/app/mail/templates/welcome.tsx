@@ -8,6 +8,9 @@ import {
     Heading,
     Text,
     Tailwind,
+    Link,
+    Button,
+    Section,
 } from '@react-email/components'
 
 interface WelcomeEmailProps {
