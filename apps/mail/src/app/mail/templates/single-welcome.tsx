@@ -16,9 +16,7 @@ interface ValidationCodeProps {
     email?: string
 }
 
-const baseUrl = process.env.VERCEL_URL
-    ? `https://${process.env.VERCEL_URL}`
-    : ''
+const baseUrl = process.env.BASE_URL ? `https://${process.env.BASE_URL}` : ''
 
 export function ValidationCode({ username, email }: ValidationCodeProps) {
     const previewText = `Confirme seu email`
