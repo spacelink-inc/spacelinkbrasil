@@ -6,7 +6,7 @@
     "scripts": {
         "dev": "tsx watch ./src/app.ts",
         "build": "tsc",
-        "start": "node dist/app.js"
+        "start": "node -r tsconfig-paths/register dist/app.js"
     },
     "keywords": [],
     "author": "",
@@ -19,7 +19,8 @@
         "react-dom": "19.0.0",
         "resend": "^4.0.1",
         "tsx": "^4.19.2",
-        "zod": "^3.24.1"
+        "zod": "^3.24.1",
+        "tsconfig-paths": "^4.2.0"
     },
     "devDependencies": {
         "@types/express": "^5.0.0",
